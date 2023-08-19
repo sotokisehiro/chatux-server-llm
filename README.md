@@ -45,7 +45,9 @@ http://127.0.0.1:8001/
 
 ![Alt text](img/img01.png)
 
-[![応答速度イメージ](img/img02.png)](https://youtu.be/h3-edtm-NLQ)
+次の画像をクリックすると youtube で応答速度を確認できます。
+
+[![応答イメージ](img/img02.png)](https://youtu.be/h3-edtm-NLQ)
 
 ## ToDo
 
