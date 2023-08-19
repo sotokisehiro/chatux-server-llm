@@ -45,6 +45,8 @@ http://127.0.0.1:8001/
 
 ![Alt text](img/img01.png)
 
+<video src="img/sample01.mp4" controls title="動作速度のイメージ"></video>
+
 ## ToDo
 
 - Windows 版インストーラの開発
