@@ -1,6 +1,7 @@
 ctranslate2
 torch
-sentencepiece transformers
+sentencepiece
+transformers
 accelerate
 protobuf
 gradio
