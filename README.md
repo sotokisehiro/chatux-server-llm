@@ -13,13 +13,27 @@ CPU だけで動作します。（NVIDA のグラボは不要）
 
 # インストール手順（Linux 版）
 
-付属の簡易インストーラスクリプトを実行してください。
+任意のディレクトリで、付属の簡易インストーラスクリプトを実行してください。
 
 ```
 bash ./install_linux.sh
 ```
 
-インターネットから大量のダウンロードが発生するため、しばらくお待ちください。
+# インストール手順（Windows 版）
+
+本サイトからなんらかの方法で環境一式をダウンロードし、任意のフォルダに配置したのち、PowerShell から次のコマンドを実行してください。
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft --low_cpu_mem_usage --output_dir line-sft --quantization int8 --force
+python3 ct2-main.py
+```
+
+# 実行時の注意
+
+初回実行時のみ、インターネットから大量のダウンロードが発生するため、しばらくお待ちください。
 エラーがなければ AI サーバーが起動しますので、
 ブラウザから次の URL を開いてください。
 
