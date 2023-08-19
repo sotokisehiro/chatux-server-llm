@@ -1,4 +1,4 @@
-# chatux-server-rinna
+# chatux-server-llm
 
 ちょっと待ってねっ。
 
