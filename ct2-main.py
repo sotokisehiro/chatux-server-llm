@@ -11,8 +11,8 @@ HOST = '0.0.0.0'
 PORT = 8001
 URL = f'http://{HOST}:{PORT}'
 
-model_name = "rinna/japanese-gpt-neox-3.6b-instruction-ppo"
-ct2_model = "rinna-ppo-ct2"
+model_name = "line-corporation/japanese-large-lm-3.6b-instruction-sft"
+ct2_model = "line-sft"
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 generator = ctranslate2.Generator(ct2_model)
@@ -22,7 +22,7 @@ tokenizer = transformers.AutoTokenizer.from_pretrained(
 
 
 def generate_text(input):
-    prompt = "ユーザー :" + input + "<NL>システム :"
+    prompt = "ユーザー :" + input + "システム :"
     tokens = tokenizer.convert_ids_to_tokens(
         tokenizer.encode(prompt, add_special_tokens=False))
     results = generator.generate_batch(
