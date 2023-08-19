@@ -45,7 +45,7 @@ http://127.0.0.1:8001/
 
 ![Alt text](img/img01.png)
 
-<video src="img/sample01.mp4" controls title="動作速度のイメージ"></video>
+[![応答速度イメージ](img/img02.png)](https://youtu.be/h3-edtm-NLQ)
 
 ## ToDo
 
