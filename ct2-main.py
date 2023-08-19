@@ -5,11 +5,25 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 import os
+import argparse
 
 # specify chat server
 HOST = '127.0.0.1'
 PORT = 8001
 URL = f'http://{HOST}:{PORT}'
+
+# 引数の評価
+parser = argparse.ArgumentParser()
+parser.add_argument("--listen", type=str,
+                    help="Network Share", default="127.0.0.1")
+parser.add_argument("--port", type=int,
+                    help="Network Share", default=8001)
+args = parser.parse_args()
+
+if args.listen != HOST:
+    HOST = args.listen
+if args.port != PORT:
+    PORT = args.port
 
 model_name = "line-corporation/japanese-large-lm-3.6b-instruction-sft"
 ct2_model = "line-sft"
@@ -29,7 +43,7 @@ def generate_text(input):
         [tokens],
         max_length=100,
         sampling_topk=20,
-        sampling_temperature=0.7,
+        sampling_temperature=0.5,
         include_prompt_in_result=False,
         repetition_penalty=1.1,
     )

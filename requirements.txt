@@ -6,3 +6,5 @@ accelerate
 protobuf
 fastapi
 uvicorn
+argparse
+peft
