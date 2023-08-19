@@ -1,12 +1,30 @@
 # chatux-server-llm
 
-ちょっと待ってねっ。
+ローカル環境で動作する文章生成 AI チャットボットです。
+CPU だけで動作します。（NVIDA のグラボは不要）
 
-謎の呪文
-(git、python、pip は各自で用意してねっ)
+# 要件
+
+- 第 8 世代以降の Corei 3
+- メインメモリ 8G バイト
+- ストレージ 10G バイト（SSD を強く推奨）
+- OS: Linux/Windows11 で動作確認
+- その他: Linux 用の簡易インストーラ/サーバー起動用のスクリプトあり
+
+# インストール手順（Linux 版）
+
+付属の簡易インストーラスクリプトを実行してください。
 
 ```
-pip3 install -r requirements.txt
-ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft --low_cpu_mem_usage --output_dir line-sft --quantization int8 --force
-python3 ct2-main.py
+bash ./install_linux.sh
 ```
+
+エラーがなければ AI サーバーが起動します。ブラウザから次の URL を開いてください。
+
+```
+http://127.0.0.1:8001/
+```
+
+# ライセンス
+
+MIT
