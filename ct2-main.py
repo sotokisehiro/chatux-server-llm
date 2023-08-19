@@ -7,7 +7,7 @@ import uvicorn
 import os
 
 # specify chat server
-HOST = '0.0.0.0'
+HOST = '127.0.0.1'
 PORT = 8001
 URL = f'http://{HOST}:{PORT}'
 
