@@ -1,0 +1,8 @@
+ctranslate2
+torch
+sentencepiece transformers
+accelerate
+protobuf
+gradio
+fastapi
+uvicorn
