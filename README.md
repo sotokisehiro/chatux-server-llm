@@ -49,6 +49,13 @@ http://127.0.0.1:8001/
 
 [![応答イメージ](img/img02.png)](https://youtu.be/h3-edtm-NLQ)
 
+# TIPS
+
+- メモリ不足で言語モデル変換できない方は
+  [huggingface](https://huggingface.co/sehiro/LINE-ct2-jp)
+  から変換済のモデルをダウンロードしてください。
+  もっともメモリを使う「ct2-transformers-converter」コマンドの実行をスキップできます。
+
 ## ToDo
 
 - Windows 版インストーラの開発
