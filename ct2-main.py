@@ -17,19 +17,33 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--listen", type=str,
                     help="Network Share", default="127.0.0.1")
 parser.add_argument("--port", type=int,
-                    help="Network Share", default=8001)
+                    help="Network port", default=8001)
+parser.add_argument("--maxspeed", type=str,
+                    help="Max speed up mode. ON/OFF (default OFF)", default="None")
 args = parser.parse_args()
 
 if args.listen != HOST:
     HOST = args.listen
 if args.port != PORT:
     PORT = args.port
+if args.maxspeed == "ON":
+    # CPUコアの数を設定する。（AMDではHTTがカウントされていないかも？）
+    CPU_THREAD = os.cpu_count()
+else:
+    CPU_THREAD = 0
 
 model_name = "line-corporation/japanese-large-lm-3.6b-instruction-sft"
 ct2_model = "line-sft"
 
 current_path = os.path.dirname(os.path.abspath(__file__))
-generator = ctranslate2.Generator(ct2_model)
+if CPU_THREAD == 0:
+    generator = ctranslate2.Generator(ct2_model)
+else:
+    # generator = ctranslate2.Generator(ct2_model, intra_threads=CPU_THREAD)
+    generator = ctranslate2.Generator(ct2_model,
+                                       inter_threads=CPU_THREAD, 
+                                       # intra_threads=CPU_THREAD,
+    )
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(
     model_name, use_fast=False)
