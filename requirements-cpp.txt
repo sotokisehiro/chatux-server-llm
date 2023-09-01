@@ -1,0 +1,12 @@
+ctranslate2
+torch
+sentencepiece
+transformers
+accelerate
+protobuf
+fastapi
+uvicorn
+argparse
+peft
+tqdm
+llama-cpp-python
