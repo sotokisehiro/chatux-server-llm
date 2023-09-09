@@ -84,6 +84,23 @@ pip install -r requirements-cpp.txt
 python3 cpp-main.py
 ```
 
+### 開発版を Docker で動かす
+
+ビルド環境を整えるのが難しい場合は Docker を使って起動できます。
+
+- 起動
+
+```
+docker compose up
+```
+
+- 終了
+
+```
+docker compose down
+```
+
+
 ## ToDo
 
 - Windows 版インストーラの開発
