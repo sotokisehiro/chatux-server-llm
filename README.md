@@ -29,7 +29,7 @@ venv/Scripts/activate
 pip3 install -r requirements.txt
 ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft --low_cpu_mem_usage --output_dir line-sft --quantization int8 --force
 
-python ct2-main.py
+python main.py --aiengine=1
 ```
 
 # 実行時の注意
@@ -60,7 +60,7 @@ http://127.0.0.1:8001/
 - つよつよ CPU をお持ちの方は次のオプションを追加すると、AI エンジンがより高速に動作する可能性があります。（副作用として若干メインメモリの消費量が増えます）
 
 ```
-python ct2-main.py --maxspeed ON
+python main.py --aiengine=1 --maxspeed ON
 ```
 
 ## 開発版
@@ -81,7 +81,7 @@ AI エンジンを llama.cpp に差し替えることで
 
 ```
 pip install -r requirements-cpp.txt
-python3 cpp-main.py
+python main.py
 ```
 
 ## ToDo
