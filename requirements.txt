@@ -8,3 +8,5 @@ fastapi
 uvicorn
 argparse
 peft
+tqdm
+llama-cpp-python
