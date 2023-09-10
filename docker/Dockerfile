@@ -10,7 +10,7 @@ RUN apt-get install -y git build-essential
 RUN git clone https://github.com/sotokisehiro/chatux-server-llm.git /app
 WORKDIR /app
 RUN python -m pip install --upgrade pip
-RUN python -m pip install -r requirements-cpp.txt
+RUN python -m pip install -r requirements.txt
 
 COPY ./docker/entrypoint.sh /
 RUN chmod 755 /entrypoint.sh
