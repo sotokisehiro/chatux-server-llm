@@ -63,6 +63,43 @@ http://127.0.0.1:8001/
 python main.py --aiengine=1 --maxspeed ON
 ```
 
+
+## 開発版
+
+AI エンジンを llama.cpp に差し替えることで
+主に Llama 系言語モデルの高速化を狙っています。
+
+ただインストールに C コンパイルが必要等、
+初心者にはかなりインストールのハードルが高いと思われるため、
+現状はソースを読んで理解できる方だけお使い頂けると…。
+
+- https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf
+からggufファイルをダウンロードして「models」フォルダに配置してください。
+
+- コマンドプロンプト等から次のコマンドを入力してください
+
+```
+pip install -r requirements-cpp.txt
+python main.py
+```
+
+### 開発版を Docker で動かす
+
+ビルド環境を整えるのが難しい場合は Docker を使って起動できます。
+
+- 起動
+
+```
+docker compose up
+```
+
+- 終了
+
+```
+docker compose down
+```
+
+
 ## ToDo
 
 - Windows 版インストーラの開発
