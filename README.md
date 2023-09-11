@@ -52,7 +52,7 @@ http://127.0.0.1:8001/
 
 # TIPS
 
-- メモリ不足で言語モデル変換できない方は
+- メインメモリ不足で言語モデル変換できない方は
   [huggingface](https://huggingface.co/sehiro/LINE-ct2-jp)
   から変換済のモデルをダウンロードしてください。
   もっともメモリを使う「ct2-transformers-converter」コマンドの実行をスキップできます。
@@ -61,27 +61,6 @@ http://127.0.0.1:8001/
 
 ```
 python main.py --aiengine=1 --maxspeed ON
-```
-
-## 開発版
-
-本当はブランチを切るのが正当な手法なのでしょうが、
-開発版のコードもこちらで一時的に公開しておきます。
-AI エンジンを llama.cpp に差し替えることで
-主に Llama 系言語モデルの高速化を狙っています。
-
-ただインストールに C コンパイルが必要等、
-初心者にはかなりインストールのハードルが高いと思われるため、
-現状はソースを読んで理解できる方だけお使い頂けると…。
-
-- https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf
-からggufファイルをダウンロードして「models」フォルダに配置してください。
-
-- コマンドプロンプト等から次のコマンドを入力してください
-
-```
-pip install -r requirements-cpp.txt
-python main.py
 ```
 
 ## ToDo
