@@ -52,7 +52,7 @@ http://127.0.0.1:8001/
 
 # TIPS
 
-- メモリ不足で言語モデル変換できない方は
+- メインメモリ不足で言語モデル変換できない方は
   [huggingface](https://huggingface.co/sehiro/LINE-ct2-jp)
   から変換済のモデルをダウンロードしてください。
   もっともメモリを使う「ct2-transformers-converter」コマンドの実行をスキップできます。
@@ -63,10 +63,9 @@ http://127.0.0.1:8001/
 python main.py --aiengine=1 --maxspeed ON
 ```
 
+
 ## 開発版
 
-本当はブランチを切るのが正当な手法なのでしょうが、
-開発版のコードもこちらで一時的に公開しておきます。
 AI エンジンを llama.cpp に差し替えることで
 主に Llama 系言語モデルの高速化を狙っています。
 
