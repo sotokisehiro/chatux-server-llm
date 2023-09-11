@@ -1,4 +1,5 @@
 import argparse
+import html
 import os
 
 import ctranslate2
@@ -64,7 +65,6 @@ class ElyzaEngine(Engine):
 
     # ELYZA用生成呼び出し
     def generate_text(self, input) -> str:
-        # ELYZA用生成呼び出し
         B_INST, E_INST = "[INST]", "[/INST]"
         B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
         DEFAULT_SYSTEM_PROMPT = "あなたは誠実で優秀な日本人のアシスタントです。"
@@ -149,10 +149,9 @@ app = FastAPI()
 
 
 @app.get("/chat_api")
-async def chat(text: str = ""):
+async def chat(text: str = "") -> dict[str, list[dict[str, str]]]:
     res = engine.generate_text(text)
-    generated_text = res
-    reply = generated_text.replace("\n", "<br>")
+    reply = html.escape(res).replace("\n", "<br>")
     print(f"input:{text} reply:{reply}")
 
     outJson = {"output": [{"type": "text", "value": reply}]}
@@ -162,11 +161,11 @@ async def chat(text: str = ""):
 app.mount("/", StaticFiles(directory="html", html=True), name="html")
 
 
-def start_server():
+def start_server() -> None:
     uvicorn.run(app, host=HOST, port=PORT)
 
 
-def main():
+def main() -> None:
     start_server()
 
     # When you want to open a browser at the same time
