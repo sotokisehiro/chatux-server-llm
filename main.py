@@ -1,4 +1,5 @@
 import argparse
+import html
 import os
 
 import ctranslate2
@@ -149,10 +150,9 @@ app = FastAPI()
 
 
 @app.get("/chat_api")
-async def chat(text: str = ""):
+async def chat(text: str = "") -> dict[str, list[dict[str, str]]]:
     res = engine.generate_text(text)
-    generated_text = res
-    reply = generated_text.replace("\n", "<br>")
+    reply = html.escape(res).replace("\n", "<br>")
     print(f"input:{text} reply:{reply}")
 
     outJson = {"output": [{"type": "text", "value": reply}]}
@@ -162,11 +162,11 @@ async def chat(text: str = ""):
 app.mount("/", StaticFiles(directory="html", html=True), name="html")
 
 
-def start_server():
+def start_server() -> None:
     uvicorn.run(app, host=HOST, port=PORT)
 
 
-def main():
+def main() -> None:
     start_server()
 
     # When you want to open a browser at the same time
