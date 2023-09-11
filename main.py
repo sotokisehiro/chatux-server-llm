@@ -65,7 +65,6 @@ class ElyzaEngine(Engine):
 
     # ELYZA用生成呼び出し
     def generate_text(self, input) -> str:
-        # ELYZA用生成呼び出し
         B_INST, E_INST = "[INST]", "[/INST]"
         B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
         DEFAULT_SYSTEM_PROMPT = "あなたは誠実で優秀な日本人のアシスタントです。"
