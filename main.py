@@ -2,12 +2,11 @@ import argparse
 import html
 import os
 
-import ctranslate2
-import transformers
 import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from llama_cpp import Llama
+
+from engine import CTranslate2Engine, ElyzaEngine, Engine
 
 # specify chat server
 HOST = "127.0.0.1"
@@ -50,85 +49,15 @@ SWITCH_AI_ENGINE = args.aiengine
 MODEL_NAME = args.modelname
 
 
-class Engine(object):
-    def generate_text(self, input) -> str:
-        raise NotImplementedError()
-
-
-class ElyzaEngine(Engine):
-    def __init__(self) -> None:
-        self.llm = Llama(
-            model_path=MODEL_NAME,
-            n_threads=CPU_THREAD,
-            seed=1234,
-        )
-
-    # ELYZA用生成呼び出し
-    def generate_text(self, input) -> str:
-        B_INST, E_INST = "[INST]", "[/INST]"
-        B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
-        DEFAULT_SYSTEM_PROMPT = "あなたは誠実で優秀な日本人のアシスタントです。"
-
-        prompt = "{b_inst} {system}{prompt} {e_inst} ".format(
-            b_inst=B_INST,
-            system=f"{B_SYS}{DEFAULT_SYSTEM_PROMPT}{E_SYS}",
-            prompt=input,
-            e_inst=E_INST,
-        )
-
-        output = self.llm(
-            prompt,
-            temperature=0.1,
-            repeat_penalty=1.1,
-            top_k=10000,
-            stop=["Instruction:", "Input:", "Response:"],
-        )
-
-        return output["choices"][0]["text"]
-
-
-class CtranslateEngine(Engine):
-    def __init__(self) -> None:
-        self.model_name = "line-corporation/japanese-large-lm-3.6b-instruction-sft"
-        self.ct2_model = "line-sft"
-        if CPU_THREAD == 0:
-            self.generator = ctranslate2.Generator(self.ct2_model)
-        else:
-            self.generator = ctranslate2.Generator(
-                self.ct2_model,
-                inter_threads=CPU_THREAD,
-            )
-        self.tokenizer = transformers.AutoTokenizer.from_pretrained(
-            self.model_name, use_fast=False
-        )
-
-    # LINE用生成呼び出し
-    def generate_text(self, input) -> str:
-        prompt = "ユーザー :" + input + "システム :"
-        tokens = self.tokenizer.convert_ids_to_tokens(
-            self.tokenizer.encode(prompt, add_special_tokens=False)
-        )
-        results = self.generator.generate_batch(
-            [tokens],
-            max_length=100,
-            sampling_topk=20,
-            sampling_temperature=0.5,
-            include_prompt_in_result=False,
-            repetition_penalty=1.1,
-        )
-        text = self.tokenizer.decode(results[0].sequences_ids[0])
-        return text
-
-
 # 生成AIエンジンの初期化
 if SWITCH_AI_ENGINE == 0:
     # llama_cpp_python
     # ELYZA/Llama2系の生成エンジン).
-    engine: Engine = ElyzaEngine()
+    engine: Engine = ElyzaEngine(CPU_THREAD)
 else:
     # Ctranslate2
     # LINE生成エンジン.
-    engine: Engine = CtranslateEngine()
+    engine: Engine = CTranslate2Engine(CPU_THREAD)
 
 
 app = FastAPI()
