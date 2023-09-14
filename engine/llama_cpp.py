@@ -3,7 +3,7 @@ from llama_cpp import Llama
 from engine.engine import Engine
 
 
-class ElyzaEngine(Engine):
+class LlamaCppEngine(Engine):
     def __init__(self, cpu_thread=0) -> None:
         super().__init__(cpu_thread)
         model_name = "models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf"
