@@ -8,4 +8,6 @@ services:
       - 8001:8001
     volumes:
       - ./models:/app/models
+      - ./line-sft:/app/line-sft
+      - ./html:/app/html
 
