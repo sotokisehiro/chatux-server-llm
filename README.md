@@ -28,9 +28,9 @@ bash ./install_linux.sh
 python3 -m venv venv
 venv/Scripts/activate
 pip3 install -r requirements.txt
-ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft --low_cpu_mem_usage --output_dir line-sft --quantization int8 --force
+wget -P models https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
 
-python main.py --aiengine=1
+python main.py
 ```
 
 # 実行時の注意
@@ -64,7 +64,6 @@ http://127.0.0.1:8001/
 python main.py --aiengine=1 --maxspeed=ON
 ```
 
-
 ## 開発版
 
 AI エンジンを llama.cpp に差し替えることで
@@ -74,10 +73,8 @@ AI エンジンを llama.cpp に差し替えることで
 初心者にはかなりインストールのハードルが高いと思われるため、
 現状はソースを読んで理解できる方だけお使い頂けると…。
 
-- [huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)
-からggufファイルをダウンロードして `models` フォルダに配置してください。
-
-- コマンドプロンプト等から次のコマンドを入力してください
+[huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)からモデル([ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/mainELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf))をダウンロードして `models` フォルダに配置してください。
+その上でコマンドプロンプト等から次のコマンドを入力してください。
 
 ```
 pip install -r requirements.txt
@@ -88,9 +85,9 @@ python main.py
 
 ビルド環境を整えるのが難しい場合は Docker を使って起動できます。
 
- [huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)から
- モデル([ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf))を
- ダウンロードして `models` フォルダに配置したあとに下記の手順で起動および終了してください。
+[huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)から
+モデル([ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf))を
+ダウンロードして `models` フォルダに配置したあとに下記の手順で起動および終了してください。
 
 - 起動
 
@@ -103,7 +100,6 @@ docker compose up
 ```
 docker compose down
 ```
-
 
 ## ToDo
 
