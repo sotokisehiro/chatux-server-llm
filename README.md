@@ -64,17 +64,14 @@ http://127.0.0.1:8001/
 python main.py --aiengine=1 --maxspeed=ON
 ```
 
-## 開発版
+## デフォルトの AI エンジンを llama.cpp に差し替え
 
 AI エンジンを llama.cpp に差し替えることで
 主に Llama 系言語モデルの高速化を狙っています。
 
-ただインストールに C コンパイルが必要等、
-初心者にはかなりインストールのハードルが高いと思われるため、
-現状はソースを読んで理解できる方だけお使い頂けると…。
-
-[huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)からモデル([ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/mainELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf))をダウンロードして `models` フォルダに配置してください。
-その上でコマンドプロンプト等から次のコマンドを入力してください。
+[huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)から
+モデル([ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/mainELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf))をダウンロードして `models` フォルダに配置したあとに下記の
+手順でコマンドプロンプト等から次のコマンドを入力してください。
 
 ```
 pip install -r requirements.txt
