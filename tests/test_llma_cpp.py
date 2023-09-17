@@ -12,5 +12,4 @@ class TestLlamaCppEngine:
 
     def test_self_introduction(self, init_engine):
         res = self.engine.generate_text("自己紹介してください。")
-        print("res: {res}")
         assert "ELYZA" in res
