@@ -64,7 +64,7 @@ http://127.0.0.1:8001/
 python main.py --aiengine=1 --maxspeed=ON
 ```
 
-## デフォルトの AI エンジンを llama.cpp に差し替え
+### デフォルトの AI エンジンを llama.cpp に差し替え
 
 AI エンジンを llama.cpp に差し替えることで
 主に Llama 系言語モデルの高速化を狙っています。
@@ -78,7 +78,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-### 開発版を Docker で動かす
+### Docker で動かす
 
 ビルド環境を整えるのが難しい場合は Docker を使って起動できます。
 
