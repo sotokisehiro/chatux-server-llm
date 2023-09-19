@@ -44,7 +44,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: line-sft
-          key: ${{ runner.os }}-ctranslate2-model-${{ hashFiles('line-sft/*') }}
+          key: ${{ runner.os }}-ctranslate2-model
       - name: Fetch Model for CTranslate2Engine
         if: steps.cache-ctranslate2-model.outputs.cache-hit != 'true'
         run: ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft --low_cpu_mem_usage --output_dir line-sft --quantization int8 --force
