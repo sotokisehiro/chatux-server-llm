@@ -43,7 +43,7 @@ jobs:
         id: cache-ctranslate2-model
         uses: actions/cache@v3
         with:
-          path: line-sft/model.bin
+          path: line-sft/*
           key: ${{ runner.os }}-ctranslate2-model
       - name: Fetch Model for CTranslate2Engine
         if: steps.cache-ctranslate2-model.outputs.cache-hit != 'true'
