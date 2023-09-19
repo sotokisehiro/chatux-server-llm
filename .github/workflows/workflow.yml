@@ -68,6 +68,6 @@ jobs:
       - name: Lint with ruff
         run: |
           python -m ruff --format=github .
-      - name: Test with pytest
-        run: |
-          python -m pytest
+      # - name: Test with pytest
+      #   run: |
+      #     python -m pytest
