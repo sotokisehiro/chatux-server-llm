@@ -12,4 +12,7 @@ class TestCTranslate2Engine:
 
     def test_self_introduction(self, init_engine):
         res = self.engine.generate_text("自己紹介してください。")
-        assert "アシスタント" in res
+        result = False
+        if "アシスタント" in res:
+            result = True
+        assert result
