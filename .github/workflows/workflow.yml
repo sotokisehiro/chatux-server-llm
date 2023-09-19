@@ -24,7 +24,8 @@ jobs:
           pip install ruff
       - name: Download and Convert Models
         run: |
-          wget -P models https://huggingkkkk.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
+          wget -P models https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
+
       - name: Lint with ruff
         run: |
           ruff --format=github --select=E9,F63,F7,F82 .
