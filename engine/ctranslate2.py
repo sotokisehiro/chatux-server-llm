@@ -1,5 +1,3 @@
-import platform
-
 import ctranslate2
 import transformers
 
@@ -8,11 +6,6 @@ from engine.engine import Engine
 
 class CTranslate2Engine(Engine):
     def __init__(self, cpu_thread=0) -> None:
-        if platform.system() == "Darwin":
-            major, minor, _ = platform.python_version_tuple()
-            if int(major) == 3:
-                if int(minor) < 11:
-                    cpu_thread = 0
         super().__init__(cpu_thread)
         self.model_name = "line-corporation/japanese-large-lm-3.6b-instruction-sft"
         self.ct2_model = "line-sft"
