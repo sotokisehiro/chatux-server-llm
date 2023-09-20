@@ -31,7 +31,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'requirements.txt.freeze'
       - run: python -m pip install -U pip
-      - run: python -m pip install -r requirements.txt.freeze
+      - run: python -m pip install -U -r requirements.txt.freeze
       - name: Install flake8, black, mypy and ruff
         run: |
           python -m pip install flake8
