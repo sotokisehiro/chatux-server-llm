@@ -9,8 +9,8 @@ class LlamaCppEngine(Engine):
     def __init__(self, cpu_thread=0) -> None:
         if platform.system() == "Darwin":
             major, minor, _ = platform.python_version_tuple()
-            if major == 3:
-                if minor < 11:
+            if int(major) == 3:
+                if int(minor) < 11:
                     cpu_thread = 0
         super().__init__(cpu_thread)
         model_name = "models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf"
