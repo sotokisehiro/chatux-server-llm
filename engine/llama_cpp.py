@@ -34,4 +34,4 @@ class LlamaCppEngine(Engine):
             stop=["Instruction:", "Input:", "Response:"],
         )
 
-        return output["choices"][0]["text"]
+        return output["choices"][0]["text"]  # type: ignore
