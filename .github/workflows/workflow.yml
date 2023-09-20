@@ -61,8 +61,8 @@ jobs:
         run: python -m flake8 --exclude .venv/,.cache --max-line-length=88 .
       - name: Lint with black
         run: python -m black --check --extend-exclude .venv --diff --line-length 88 --skip-string-normalization .
-      # - name: Lint with mypy
-      #   run: python -m mypy .
+      - name: Lint with mypy
+        run: python -m mypy .
       - name: Lint with ruff
         run: |
           python -m ruff --format=github .
