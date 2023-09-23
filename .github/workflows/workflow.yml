@@ -50,6 +50,7 @@ jobs:
         with:
           path: line-sft
           key: ctranslate2-model
+          restore-keys: ctranslate2-model-${{ hashFiles('line-sft/config.json', 'line-sft/model.bin', 'line-sft/vocabulary.json') }}
           enableCrossOsArchive: true
       - name: Fetch Model for CTranslate2Engine
         if: steps.cache-ctranslate2-model.outputs.cache-hit != 'true'
@@ -61,6 +62,7 @@ jobs:
         with:
           path: models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
           key: llama_cpp-model
+          restore-keys: llama_cpp-model-${{ hashFiles('models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf') }}
           enableCrossOsArchive: true
       - name: Fetch Model for LlamaCppEngine
         if: steps.cache-llama_cpp-model.outputs.cache-hit != 'true'
