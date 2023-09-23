@@ -18,7 +18,7 @@ jobs:
             python-version: "3.10"
 
     steps:
-      - name: Maximize build space
+      - name: Maximize build space on Ubuntu
         if: startsWith(matrix.os,'ubuntu-')
         uses: easimon/maximize-build-space@master
         with:
@@ -64,6 +64,9 @@ jobs:
           key: llama_cpp-model
           restore-keys: llama_cpp-model-${{ hashFiles('models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf') }}
           enableCrossOsArchive: true
+      - name: Install wget on Windows
+        if: startsWith(matrix.os,'windows-')
+        run: choco install wget
       - name: Fetch Model for LlamaCppEngine
         if: steps.cache-llama_cpp-model.outputs.cache-hit != 'true'
         run: wget -P models https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
