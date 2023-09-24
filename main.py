@@ -7,7 +7,12 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from engine import Engine
-from engine.builder import CTranslate2EngineBuilder, Director, LlamaCppEngineBuilder
+from engine.builder import (
+    CTranslate2EngineBuilder,
+    Director,
+    EngineBuilder,
+    LlamaCppEngineBuilder,
+)
 
 # specify chat server
 HOST: str = "127.0.0.1"
@@ -55,13 +60,11 @@ director = Director()
 if SWITCH_AI_ENGINE == 0:
     # llama_cpp_python
     # ELYZA/Llama2系の生成エンジン).
-    builder = LlamaCppEngineBuilder(CPU_THREAD)
-    director.set_builder(builder)
+    director.set_builder(LlamaCppEngineBuilder(CPU_THREAD))
 else:
     # Ctranslate2
     # LINE生成エンジン.
-    builder = CTranslate2EngineBuilder(CPU_THREAD)
-    director.set_builder(builder)
+    director.set_builder(CTranslate2EngineBuilder(CPU_THREAD))
 
 engine: Engine = director.get_engine()
 app = FastAPI()

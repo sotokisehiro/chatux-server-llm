@@ -12,10 +12,8 @@ class EngineBuilder(ABC):
 
 
 class Director(object):
-    __builder = None
-
     def set_builder(self, builder: EngineBuilder) -> None:
-        self.__builder = builder
+        self.__builder: EngineBuilder = builder
 
     def get_engine(self) -> Engine:
         return self.__builder.get_engine()
