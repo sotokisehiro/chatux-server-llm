@@ -51,8 +51,7 @@ jobs:
       - name: Lint with mypy
         run: python -m mypy .
       - name: Lint with ruff
-        run: |
-          python -m ruff --format=github .
+        run: python -m ruff --format=github .
 
       - name: Install wget on Windows
         if: startsWith(matrix.os,'windows-')
@@ -63,7 +62,6 @@ jobs:
         with:
           path: line-sft
           key: ctranslate2-model
-          restore-keys: ctranslate2-model-${{ hashFiles('line-sft/config.json', 'line-sft/model.bin', 'line-sft/vocabulary.json') }}
           enableCrossOsArchive: true
       - name: Fetch Model for CTranslate2Engine
         if: steps.cache-ctranslate2-model.outputs.cache-hit != 'true'
@@ -71,14 +69,12 @@ jobs:
           wget -P line-sft https://huggingface.co/sehiro/LINE-ct2-jp/resolve/main/line-sft/config.json
           wget -P line-sft https://huggingface.co/sehiro/LINE-ct2-jp/resolve/main/line-sft/vocabulary.json
           wget -P line-sft https://huggingface.co/sehiro/LINE-ct2-jp/resolve/main/line-sft/model.bin
-
       - name: Cache Model for LlamaCppEngine
         id: cache-llama_cpp-model
         uses: actions/cache@v3
         with:
           path: models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
           key: llama_cpp-model
-          restore-keys: llama_cpp-model-${{ hashFiles('models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf') }}
           enableCrossOsArchive: true
       - name: Fetch Model for LlamaCppEngine
         if: steps.cache-llama_cpp-model.outputs.cache-hit != 'true'
