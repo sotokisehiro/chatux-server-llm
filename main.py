@@ -7,12 +7,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from engine import Engine
-from engine.builder import (
-    CTranslate2EngineBuilder,
-    Director,
-    EngineBuilder,
-    LlamaCppEngineBuilder,
-)
+from engine.builder import CTranslate2EngineBuilder, Director, LlamaCppEngineBuilder
 
 # specify chat server
 HOST: str = "127.0.0.1"
