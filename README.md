@@ -10,13 +10,14 @@ CPU だけで動作するため NVIDIA のグラフィックスボードは不�
 
 - 第 8 世代以降の Corei 3
 - メインメモリ 8G バイト
-- ストレージ 10G バイト（SSD を強く推奨）
-- OS: Linux/Windows11 で動作を確認しています。
-- その他: Linux 用の簡易インストーラ/サーバー起動用のスクリプトあり
+- ストレージ 10G バイト
+  - SSD を強く推奨
+- Linux, Windows11, macOS で動作を確認しています。
+- Linux 用の簡易インストーラ/サーバー起動用のスクリプトあり
 
 # インストール手順（Linux 版）
 
-任意のディレクトリで、付属の簡易インストーラスクリプトを実行してください。
+任意のディレクトリで付属の簡易インストーラスクリプトを実行してください。
 
 ```
 bash ./install_linux.sh
@@ -24,7 +25,8 @@ bash ./install_linux.sh
 
 # インストール手順（Windows 版）
 
-本サイトからなんらかの方法で環境一式をダウンロードし、任意のフォルダに配置したのち、PowerShell から次のコマンドを実行してください。
+本サイトからなんらかの方法で環境一式をダウンロードし、任意のフォルダに配置したのち、
+PowerShell から次のコマンドを実行してください。
 
 ```
 python3 -m venv venv
@@ -38,8 +40,7 @@ python main.py
 # 実行時の注意
 
 初回実行時のみ、インターネットから大量のダウンロードが発生するため、しばらくお待ちください。
-エラーがなければ AI サーバーが起動しますので、
-ブラウザから次の URL を開いてください。
+エラーがなければ AI サーバーが起動しますので、ブラウザから次の URL を開いてください。
 
 ```
 http://127.0.0.1:8001/
@@ -60,7 +61,8 @@ http://127.0.0.1:8001/
   から変換済のモデルをダウンロードしてください。
   もっともメモリを使う `ct2-transformers-converter` コマンドの実行をスキップできます。
 
-- つよつよ CPU をお持ちの方は次のオプションを追加すると、AI エンジンがより高速に動作する可能性があります。（副作用として若干メインメモリの消費量が増えます）
+- つよつよ CPU をお持ちの方は次のオプションを追加すると、AI エンジンがより高速に動作する可能性があります。
+  - 副作用として若干メインメモリの消費量が増えます。
 
 ```
 python main.py --aiengine=1 --maxspeed=ON
@@ -68,8 +70,7 @@ python main.py --aiengine=1 --maxspeed=ON
 
 ### デフォルトの AI エンジンを llama.cpp に差し替え
 
-AI エンジンを llama.cpp に差し替えることで
-主に Llama 系言語モデルの高速化を狙っています。
+AI エンジンを llama.cpp に差し替えることで、主に Llama 系言語モデルの高速化を狙っています。
 
 [huggingface](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf)から
 モデル([ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf](https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/mainELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf))をダウンロードして `models` フォルダに配置したあとに下記の
@@ -96,6 +97,10 @@ docker compose up
 
 - 終了
 
+`Ctrl + C` で `SIG_TERM` を送信して終了します。
+
+- 停止
+
 ```
 docker compose down
 ```
@@ -110,3 +115,4 @@ docker compose down
 # ライセンス
 
 MIT
+
