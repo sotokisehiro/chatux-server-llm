@@ -9,8 +9,8 @@ from fastapi.staticfiles import StaticFiles
 from engine import CTranslate2Engine, Engine, LlamaCppEngine
 
 # specify chat server
-HOST = "127.0.0.1"
-PORT = 8001
+HOST: str = "127.0.0.1"
+PORT: int = 8001
 
 
 # 引数の評価
@@ -38,30 +38,29 @@ if args.listen != HOST:
     HOST = args.listen
 if args.port != PORT:
     PORT = args.port
+
+CPU_THREAD: int = 0
 if args.maxspeed == "ON":
     # CPUコアの数を設定する。
-    CPU_THREAD = os.cpu_count()
-else:
-    CPU_THREAD = 0
+    CPU_THREAD = os.cpu_count() or 0
 
 URL = f"http://{HOST}:{PORT}"
-SWITCH_AI_ENGINE = args.aiengine
-MODEL_NAME = args.modelname
+SWITCH_AI_ENGINE: int = args.aiengine
+MODEL_NAME: str = args.modelname
 
 
 # 生成AIエンジンの初期化
+engine: Engine = Engine(CPU_THREAD)
 if SWITCH_AI_ENGINE == 0:
     # llama_cpp_python
     # ELYZA/Llama2系の生成エンジン).
-    engine: Engine = LlamaCppEngine(CPU_THREAD)
+    engine = LlamaCppEngine(CPU_THREAD)
 else:
     # Ctranslate2
     # LINE生成エンジン.
-    engine: Engine = CTranslate2Engine(CPU_THREAD)
-
+    engine = CTranslate2Engine(CPU_THREAD)
 
 app = FastAPI()
-
 
 # Remove CORS restrictions (if needed)
 # from fastapi.middleware.cors import CORSMiddleware
