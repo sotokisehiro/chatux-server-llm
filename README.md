@@ -1,5 +1,7 @@
 # chatux-server-llm
 
+[![Build and Test](https://github.com/sotokisehiro/chatux-server-llm/actions/workflows/workflow.yml/badge.svg)](https://github.com/sotokisehiro/chatux-server-llm/actions/workflows/workflow.yml)
+
 ローカル環境で動作する文章生成 AI チャットボットです。
 
 CPU だけで動作するため NVIDIA のグラフィックスボードは不要です。
