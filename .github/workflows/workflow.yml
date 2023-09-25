@@ -69,7 +69,7 @@ jobs:
         run: wget -P models https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
 
       - name: Lint with flake8
-        run: python -m flake8 --exclude .venv/,.cache --max-line-length=88 .
+        run: python -m flake8 --exclude .venv/,.cache,.git --max-line-length=88 .
       - name: Lint with black
         run: python -m black --check --extend-exclude .venv --diff --line-length 88 --skip-string-normalization .
       - name: Lint with mypy
