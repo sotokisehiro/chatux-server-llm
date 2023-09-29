@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.9", "3.10", "3.11"]
         exclude:
           - os: macos-latest
@@ -18,7 +18,7 @@ jobs:
             python-version: "3.10"
 
     steps:
-      - name: Maximize build space
+      - name: Maximize build space on Ubuntu
         if: startsWith(matrix.os,'ubuntu-')
         uses: easimon/maximize-build-space@master
         with:
@@ -44,30 +44,6 @@ jobs:
           python -m pip install mypy
           python -m pip install ruff
 
-      - name: Cache Model for CTranslate2Engine
-        id: cache-ctranslate2-model
-        uses: actions/cache@v3
-        with:
-          path: line-sft
-          key: ctranslate2-model
-          restore-keys: ctranslate2-model-${{ hashFiles('line-sft/config.json', 'line-sft/model.bin', 'line-sft/vocabulary.json') }}
-          enableCrossOsArchive: true
-      - name: Fetch Model for CTranslate2Engine
-        if: steps.cache-ctranslate2-model.outputs.cache-hit != 'true'
-        run: ct2-transformers-converter --model line-corporation/japanese-large-lm-3.6b-instruction-sft --low_cpu_mem_usage --output_dir line-sft --quantization int8 --force
-
-      - name: Cache Model for LlamaCppEngine
-        id: cache-llama_cpp-model
-        uses: actions/cache@v3
-        with:
-          path: models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
-          key: llama_cpp-model
-          restore-keys: llama_cpp-model-${{ hashFiles('models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf') }}
-          enableCrossOsArchive: true
-      - name: Fetch Model for LlamaCppEngine
-        if: steps.cache-llama_cpp-model.outputs.cache-hit != 'true'
-        run: wget -P models https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
-
       - name: Lint with flake8
         run: python -m flake8 --exclude .venv/,.cache --max-line-length=88 .
       - name: Lint with black
@@ -75,9 +51,36 @@ jobs:
       - name: Lint with mypy
         run: python -m mypy .
       - name: Lint with ruff
+        run: python -m ruff --format=github .
+
+      - name: Install wget on Windows
+        if: startsWith(matrix.os,'windows-')
+        run: choco install wget
+      - name: Cache Model for CTranslate2Engine
+        id: cache-ctranslate2-model
+        uses: actions/cache@v3
+        with:
+          path: line-sft
+          key: ctranslate2-model
+          enableCrossOsArchive: true
+      - name: Fetch Model for CTranslate2Engine
+        if: steps.cache-ctranslate2-model.outputs.cache-hit != 'true'
         run: |
-          python -m ruff --format=github .
+          wget -P line-sft https://huggingface.co/sehiro/LINE-ct2-jp/resolve/main/line-sft/config.json
+          wget -P line-sft https://huggingface.co/sehiro/LINE-ct2-jp/resolve/main/line-sft/vocabulary.json
+          wget -P line-sft https://huggingface.co/sehiro/LINE-ct2-jp/resolve/main/line-sft/model.bin
+      - name: Cache Model for LlamaCppEngine
+        id: cache-llama_cpp-model
+        uses: actions/cache@v3
+        with:
+          path: models/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
+          key: llama_cpp-model
+          enableCrossOsArchive: true
+      - name: Fetch Model for LlamaCppEngine
+        if: steps.cache-llama_cpp-model.outputs.cache-hit != 'true'
+        run: wget -P models https://huggingface.co/mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-gguf/resolve/main/ELYZA-japanese-Llama-2-7b-fast-instruct-q4_K_M.gguf
 
       - name: Test with pytest
         run: |
           python -m pytest
+

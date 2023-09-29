@@ -9,6 +9,6 @@ uvicorn
 argparse
 peft
 tqdm
-llama-cpp-python<=0.2.5
+llama-cpp-python
 
 pytest
