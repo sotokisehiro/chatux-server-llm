@@ -45,7 +45,7 @@ jobs:
           python -m pip install ruff
 
       - name: Lint with flake8
-        run: python -m flake8 --exclude .venv/,.cache --max-line-length=88 .
+        run: python -m flake8 --exclude .venv/,.cache,.git --max-line-length=88 .
       - name: Lint with black
         run: python -m black --check --extend-exclude .venv --diff --line-length 88 --skip-string-normalization .
       - name: Lint with mypy
