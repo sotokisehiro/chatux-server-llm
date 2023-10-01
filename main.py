@@ -50,7 +50,7 @@ MODEL_NAME: str = args.modelname
 
 
 # 生成AIエンジンの初期化
-engine_type: type[Engine] = Engine
+engine_type: type[Engine] = Engine  # type: ignore[type-abstract]
 if SWITCH_AI_ENGINE == 0:
     # llama_cpp_python
     # ELYZA/Llama2系の生成エンジン).
