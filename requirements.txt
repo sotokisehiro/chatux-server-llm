@@ -10,5 +10,6 @@ argparse
 peft
 tqdm
 llama-cpp-python
+einops
 
 pytest

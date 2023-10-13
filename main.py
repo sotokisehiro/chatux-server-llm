@@ -6,7 +6,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from engine import CTranslate2Engine, Engine, LlamaCppEngine
+from engine import AutoModelForCausalLMEngine, CTranslate2Engine, Engine, LlamaCppEngine
 
 # specify chat server
 HOST: str = "127.0.0.1"
@@ -55,10 +55,12 @@ if SWITCH_AI_ENGINE == 0:
     # llama_cpp_python
     # ELYZA/Llama2系の生成エンジン).
     engine_type = LlamaCppEngine
-else:
+elif SWITCH_AI_ENGINE == 1:
     # Ctranslate2
     # LINE生成エンジン.
     engine_type = CTranslate2Engine
+else:
+    engine_type = AutoModelForCausalLMEngine
 engine = engine_type(CPU_THREAD)
 
 app = FastAPI()
