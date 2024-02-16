@@ -51,7 +51,7 @@ jobs:
       - name: Lint with mypy
         run: python -m mypy .
       - name: Lint with ruff
-        run: python -m ruff --format=github .
+        run: python -m ruff .
 
       - name: Install wget on Windows
         if: startsWith(matrix.os,'windows-')
