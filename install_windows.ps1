@@ -65,7 +65,7 @@ if (!(Test-Path -PathType Container -Path $python_prefix)) {
     Expand-Archive -Force -DestinationPath $python_prefix -Path $python_embedded_package
     Add-Content -Path "$python_prefix/*._pth" -Value "import site"
     # chatux-server-llmのあるディレクトリからモジュールをロードできるようにする
-    Add-Content -Path "$python_prefix/*._pth" -Value $chatux_prefix
+    Add-Content -Path "$python_prefix/current.pth" -Value "import sys; sys.path.append('')"
 }
 
 # pipが使えるようにする
