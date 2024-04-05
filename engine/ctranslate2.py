@@ -21,8 +21,8 @@ class CTranslate2Engine(Engine):
         )
 
     # LINE用生成呼び出し
-    def generate_text(self, input) -> str:
-        prompt = "ユーザー :" + input + "システム :"
+    def generate_text(self, text_input: str) -> str:
+        prompt = "ユーザー :" + text_input + "システム :"
         tokens = self.tokenizer.convert_ids_to_tokens(
             self.tokenizer.encode(prompt, add_special_tokens=False)
         )

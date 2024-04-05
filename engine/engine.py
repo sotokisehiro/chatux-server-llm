@@ -6,5 +6,5 @@ class Engine(ABC):
         self.cpu_thread = cpu_thread
 
     @abstractmethod
-    def generate_text(self, input) -> str:
+    def generate_text(self, text_input: str) -> str:
         raise NotImplementedError()

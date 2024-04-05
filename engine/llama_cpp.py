@@ -14,15 +14,15 @@ class LlamaCppEngine(Engine):
         )
 
     # ELYZA用生成呼び出し
-    def generate_text(self, input) -> str:
-        B_INST, E_INST = "[INST]", "[/INST]"
-        B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
-        DEFAULT_SYSTEM_PROMPT = "あなたは誠実で優秀な日本人のアシスタントです。"
+    def generate_text(self, text_input: str) -> str:
+        B_INST, E_INST = "[INST]", "[/INST]"  # pylint: disable=invalid-name
+        B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"  # pylint: disable=invalid-name
+        SYSTEM_PROMPT = "あなたは誠実で優秀な日本人のアシスタントです。"  # pylint: disable=invalid-name
 
         prompt = "{b_inst} {system}{prompt} {e_inst} ".format(
             b_inst=B_INST,
-            system=f"{B_SYS}{DEFAULT_SYSTEM_PROMPT}{E_SYS}",
-            prompt=input,
+            system=f"{B_SYS}{SYSTEM_PROMPT}{E_SYS}",
+            prompt=text_input,
             e_inst=E_INST,
         )
 
