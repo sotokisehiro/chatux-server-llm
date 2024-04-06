@@ -50,16 +50,16 @@ MODEL_NAME: str = args.modelname
 
 
 # 生成AIエンジンの初期化
-engine_type: type[Engine] = Engine  # type: ignore[type-abstract]
+EngineType: type[Engine] = Engine  # type: ignore[type-abstract]
 if SWITCH_AI_ENGINE == 0:
     # llama_cpp_python
     # ELYZA/Llama2系の生成エンジン).
-    engine_type = LlamaCppEngine
+    EngineType = LlamaCppEngine
 else:
     # Ctranslate2
     # LINE生成エンジン.
-    engine_type = CTranslate2Engine
-engine = engine_type(CPU_THREAD)
+    EngineType = CTranslate2Engine
+engine = EngineType(CPU_THREAD)  # pylint: disable=abstract-class-instantiated
 
 app = FastAPI()
 
